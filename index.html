@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Paint a Picture - Elizabeth Rakhi Baby</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<h1> Paint a picture</h1>
+<p id="explanation">
+  Welcome to this interactive webpage where you can make a digital drawing! Please specify the dimensions before you start drawing. You may change your brush size and colour as you wish. Enjoy!
+</p>
+<p>
+  Enter width:
+  <input type="text" id="widthProvider" placeholder="Enter width..." onchange="changeWidth(this.value)" />
+
+  Enter height:
+  <input type="text" id="heightProvider" placeholder="Enter height..." onchange="changeHeight(this.value)" />
+</p>
+<canvas id="canvas1" onmousedown="startPaint()" onmousemove="doPaint(event.offsetX,event.offsetY)" onmouseup="endPaint()">
+</canvas>
+<br>
+
+<p id="mm"> Select colour:
+  <input type="color" id="colourSelector" value="red" onchange="changeColour(this.value)" />
+</p>
+
+<p id="mm">
+  Select brush size:
+  <input type="range" id="brushSelector" value="50" min="1" max="50" onchange="changeBrushSize(this.value)" />
+  <output id="sliderDisplay">50</output>
+</p>
+
+<input type="button" value="Clear Canvas" onclick="clearCanvas()" />
+
+<p>
+
+  <input type="button" value="About Author" onclick="doAbout()" />
+
+  <input type="button" value="Clear Author Info" onclick="clearAbout()" />
+
+<div id="authorInfo">
+</div>
+
+</p>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
