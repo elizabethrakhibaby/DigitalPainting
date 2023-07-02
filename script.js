@@ -5,26 +5,12 @@ var radius = 50;
 // only paint if mouse is being dragged (moved while the button is pressed)
 var isPainting = false;
 
-function startPaint(event) {	
+function startPaint() {
   isPainting = true;	
-  var coordinates = getCoordinates(event);	
-  doPaint(coordinates.x, coordinates.y);	
-}	
-
-		
-function getCoordinates(event) {	
-  var rect = paintcanvas.getBoundingClientRect();	
-  var x, y;	
-  if (event.touches) {	
-    x = event.touches[0].clientX - rect.left;	
-    y = event.touches[0].clientY - rect.top;	
-  } else {	
-    x = event.clientX - rect.left;	
-    y = event.clientY - rect.top;	
-  }	
-  return { x: x, y: y };	
+  var x = event.clientX || event.touches[0].clientX;	
+  var y = event.clientY || event.touches[0].clientY;	
+  doPaint(x, y);
 }
-
 
 function endPaint() {
   isPainting = false;
@@ -52,28 +38,14 @@ function paintCircle(x, y) {
   context.fill();
 }
 
-		
-// Add mouse event listeners	
-paintcanvas.addEventListener("mousedown", startPaint);	
-paintcanvas.addEventListener("mousemove", function (event) {	
-  if (isPainting) {	
-    var coordinates = getCoordinates(event);	
-    doPaint(coordinates.x, coordinates.y);	
-  }	
-});	
-paintcanvas.addEventListener("mouseup", endPaint);	
 // Add touch event listeners	
-paintcanvas.addEventListener("touchstart", function (event) {	
-  event.preventDefault();	
-  var coordinates = getCoordinates(event);	
-  startPaint(coordinates);	
-});	
+paintcanvas.addEventListener("touchstart", startPaint);	
 paintcanvas.addEventListener("touchmove", function (event) {	
   event.preventDefault();	
-  if (isPainting) {	
-    var coordinates = getCoordinates(event);	
-    doPaint(coordinates.x, coordinates.y);	
-  }	
+  var touch = event.touches[0];	
+  var x = touch.clientX;	
+  var y = touch.clientY;	
+  doPaint(x, y);	
 });	
 paintcanvas.addEventListener("touchend", endPaint);
 
