@@ -3,5 +3,5 @@ Hi there! Using Javascript, HTML and CSS, I created a digital painting website. 
 
 <details>
   <summary><strong>Tip</strong></summary>
-  <p>That is responsive on both desktop and mobile devices. Tip To allow for responsiveness duality, JavaScript code was modified to handle touch events in addition to mouse events.</p>
+  <p>In order to make the website responsive on both desktop and mobile devices, adjustments were made to the JavaScript code to handle touch events alongside mouse events. This ensures that the website can provide an optimal user experience on various screen sizes and input methods.</p>
 </details>
