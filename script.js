@@ -10,6 +10,8 @@ function startPaint(event) {
   var coordinates = getCoordinates(event);	
   doPaint(coordinates.x, coordinates.y);	
 }	
+
+		
 function getCoordinates(event) {	
   var rect = paintcanvas.getBoundingClientRect();	
   var x, y;	
@@ -20,6 +22,8 @@ function getCoordinates(event) {
     x = event.clientX - rect.left;	
     y = event.clientY - rect.top;	
   }	
+  return { x: x, y: y };	
+}
 
 
 function endPaint() {
