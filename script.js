@@ -6,7 +6,10 @@ var radius = 50;
 var isPainting = false;
 
 function startPaint() {
-  isPainting = true;
+  isPainting = true;	
+  var x = event.clientX || event.touches[0].clientX;	
+  var y = event.clientY || event.touches[0].clientY;	
+  doPaint(x, y);
 }
 
 function endPaint() {
@@ -15,7 +18,10 @@ function endPaint() {
 
 function doPaint(x, y) {
   if (isPainting) {
-    paintCircle(x, y);
+	  var rect = paintcanvas.getBoundingClientRect();	
+    var canvasX = x - rect.left;	
+    var canvasY = y - rect.top;	
+    paintCircle(canvasX, canvasY);
   }
 }
 
@@ -31,6 +37,17 @@ function paintCircle(x, y) {
   context.fillStyle = color;
   context.fill();
 }
+
+// Add touch event listeners	
+paintcanvas.addEventListener("touchstart", startPaint);	
+paintcanvas.addEventListener("touchmove", function (event) {	
+  event.preventDefault();	
+  var touch = event.touches[0];	
+  var x = touch.clientX;	
+  var y = touch.clientY;	
+  doPaint(x, y);	
+});	
+paintcanvas.addEventListener("touchend", endPaint);
 
 function changeWidth(value) {
   if (isNumeric(value)) {
