@@ -5,7 +5,7 @@ var radius = 50;
 // only paint if mouse is being dragged (moved while the button is pressed)
 var isPainting = false;
 
-function startPaint() {
+function startPaint(event) {
   isPainting = true;	
   var x = event.clientX || event.touches[0].clientX;	
   var y = event.clientY || event.touches[0].clientY;	
@@ -38,16 +38,17 @@ function paintCircle(x, y) {
   context.fill();
 }
 
-// Add touch event listeners	
-paintcanvas.addEventListener("touchstart", startPaint);	
-paintcanvas.addEventListener("touchmove", function (event) {	
-  event.preventDefault();	
-  var touch = event.touches[0];	
-  var x = touch.clientX;	
-  var y = touch.clientY;	
-  doPaint(x, y);	
-});	
-paintcanvas.addEventListener("touchend", endPaint);
+// Add mouse event listeners
+paintcanvas.addEventListener("mousedown", startPaint);
+paintcanvas.addEventListener("mousemove", function (event) {
+  if (isPainting) {
+    var rect = paintcanvas.getBoundingClientRect();
+    var x = event.clientX - rect.left;
+    var y = event.clientY - rect.top;
+    doPaint(x, y);
+  }
+});
+paintcanvas.addEventListener("mouseup", endPaint);
 
 function changeWidth(value) {
   if (isNumeric(value)) {
